@@ -16,7 +16,7 @@ public class Model {
         state = new TitleState();
     }
 
-    public synchronized void processTimeElapsed() {
+    public synchronized void processTimeElapsed(int msec) {
         time++;
         state.processTimeElapsed(time);
         view.repaint();
