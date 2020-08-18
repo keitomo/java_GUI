@@ -2,6 +2,7 @@ public class Model {
 
     private View view;
     private Controller controller;
+    private State state;
 
     // Sample instance variables:
     private int time;
@@ -11,24 +12,27 @@ public class Model {
     public Model() {
         view = new View(this);
         controller = new Controller(this);
+        state = new TitleState();
     }
 
     public synchronized void processTimeElapsed(int msec) {
         time++;
+        state.processTimeElapsed(time);
         view.repaint();
     }
 
     public synchronized void processKeyTyped(String typed) {
         typedChar = typed;
         view.reloadText();
-        view.repaint();
+        state.processKeyTyped(typed);
+        //view.repaint();
     }
 
     public synchronized void processMousePressed(int x, int y) {
         mx = x;
         my = y;
-        view.playBombSound();
-        view.repaint();
+        /*view.playBombSound();
+        view.repaint();*/
     }
 
     public void start() {
@@ -57,6 +61,14 @@ public class Model {
 
     public int getMY() {
         return my;
+    }
+    
+    public void repaint() {
+    	view.repaint();
+    }
+    
+    public State getState() {
+    	return state;
     }
 
 }

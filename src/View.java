@@ -16,16 +16,17 @@ public class View extends JPanel {
 
     // Sample instance variables:
     private Image image;
+    
     private AudioClip sound;
     private String s =""; 
+    private GameFiles file;
 
     public View(Model model) {
         this.model = model;
 
-        // 画像を読み込む．画像ファイルは src においておくと bin に自動コピーされる
-        image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("robot.png"));
         // サウンドを読み込む
         sound = Applet.newAudioClip(getClass().getResource("bomb.wav"));
+        file = GameFiles.getInstance();
     }
 
     /**
@@ -36,18 +37,33 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
         // 画面をいったんクリア
        clear(g);
+       State state = model.getState();
+       state.paintComponent(g);
+       
+       g.setColor(Color.red);
+       g.drawLine(400, 0, 400, 600);
+       g.drawLine(0, 300, 800, 300);
+       /*
+       g.drawImage(file.back, 0,0, this);
+       
        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
        g.setColor(Color.WHITE);
        g.drawString("Time: " + model.getTime(), 100, 200);
        g.drawString("Key Typed: " + s, 100, 250);
-       g.drawString("Mouse Pressed: " + model.getMX() + "," + model.getMY(), 100, 300);//*/
-
+       g.drawString("Mouse Pressed: " + model.getMX() + "," + model.getMY(), 100, 300);
+       g.setColor(Color.orange);
+       g.fillRect(10, 420, 100, 30);
         // 画像の表示例
-        //g.drawImage(image, model.getMX(), model.getMY(), this);
+       g.drawImage(file.MainChar, 35, 390, this);//*/
+        
     }
     
     public void reloadText() {
-    	s+=model.getTypedChar();
+    	if (model.getTypedChar().equals(" ")){
+    		s="";
+    	}
+    	else
+    		s+=model.getTypedChar();
     }
 
     /**
