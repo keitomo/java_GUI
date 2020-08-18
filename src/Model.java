@@ -7,7 +7,8 @@ public class Model {
     // Sample instance variables:
     private int time;
     private String typedChar = "";
-    private int mx, my;
+    private int mx;
+    private int my;
 
     public Model() {
         view = new View(this);
@@ -15,7 +16,7 @@ public class Model {
         state = new TitleState();
     }
 
-    public synchronized void processTimeElapsed(int msec) {
+    public synchronized void processTimeElapsed() {
         time++;
         state.processTimeElapsed(time);
         view.repaint();

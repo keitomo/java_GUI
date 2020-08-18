@@ -19,12 +19,12 @@ public class TitleState implements State {
 		if(typed.equals("UP")) {
 			NextState--;
 			if(NextState == 0)
-				NextState = State.Help;
+				NextState = State.HELP;
 		}
 		else if(typed.equals("DOWN")) {
 			NextState++;
 			if(NextState == 4)
-				NextState = State.Game;
+				NextState = State.GAME;
 		}
 		return this;
 	}
@@ -44,17 +44,19 @@ public class TitleState implements State {
 		g.drawString("Ranking", 315, 400);
 		g.drawString("Help", 350, 500);
 		switch(NextState) {
-		case State.Game:
+		case State.GAME:
 			g.setColor(Color.red);
 			g.drawString("Start", 345, 300);
 			break;
-		case State.Ranking:
+		case State.RANKING:
 			g.setColor(Color.red);
 			g.drawString("Ranking", 315, 400);
 			break;
-		case State.Help:
+		case State.HELP:
 			g.setColor(Color.red);
 			g.drawString("Help", 350, 500);
+			break;
+		default:
 			break;
 		}
 		//g.drawString(Integer.toString(NextState), 400, 200);

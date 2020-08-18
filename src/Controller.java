@@ -25,7 +25,7 @@ public class Controller implements ActionListener, KeyListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        model.processTimeElapsed(DELAY);
+        model.processTimeElapsed();
     }
 
     @Override
@@ -56,6 +56,8 @@ public class Controller implements ActionListener, KeyListener, MouseListener {
     		break;
     	case KeyEvent.VK_ALT:
     		model.processKeyTyped("ALT");
+    		break;
+    	default:
     		break;
     	}
     }
