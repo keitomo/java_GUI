@@ -18,14 +18,14 @@ public class Model {
 
     public synchronized void processTimeElapsed(int msec) {
         time++;
-        state.processTimeElapsed(time);
+        state = state.processTimeElapsed(time);
         view.repaint();
     }
 
     public synchronized void processKeyTyped(String typed) {
         typedChar = typed;
         view.reloadText();
-        state.processKeyTyped(typed);
+        state = state.processKeyTyped(typed);
         //view.repaint();
     }
 

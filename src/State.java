@@ -9,6 +9,5 @@ public interface State{
 	public static final int BOSS = 5;
 	public State processTimeElapsed(int msec);
 	public State processKeyTyped(String typed);
-	public State processMousePressed(int x,int y);
 	public void paintComponent(Graphics g);
 }

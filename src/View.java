@@ -39,22 +39,22 @@ public class View extends JPanel {
        clear(g);
        State state = model.getState();
        state.paintComponent(g);
-       
+       /*
        g.setColor(Color.red);
        g.drawLine(400, 0, 400, 600);
        g.drawLine(0, 300, 800, 300);
-       /*
+       
        g.drawImage(file.back, 0,0, this);
        
        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
        g.setColor(Color.WHITE);
        g.drawString("Time: " + model.getTime(), 100, 200);
        g.drawString("Key Typed: " + s, 100, 250);
-       g.drawString("Mouse Pressed: " + model.getMX() + "," + model.getMY(), 100, 300);
+       /*g.drawString("Mouse Pressed: " + model.getMX() + "," + model.getMY(), 100, 300);
        g.setColor(Color.orange);
        g.fillRect(10, 420, 100, 30);
         // 画像の表示例
-       g.drawImage(file.MainChar, 35, 390, this);//*/
+       g.drawImage(file.mainChar, 35, 390, this);//*/
         
     }
     

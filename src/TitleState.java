@@ -5,9 +5,7 @@ import java.awt.Graphics;
 public class TitleState implements State {
 	
 	private int NextState = 1;
-	GameFiles file = GameFiles.getInstance();
-	RandomNumGen r = RandomNumGen.getInstance();
-	private final int backx = -1*r.nextInt(1000);
+	private GameFiles file = GameFiles.getInstance();
 
 	@Override
 	public State processTimeElapsed(int msec) {
@@ -25,18 +23,24 @@ public class TitleState implements State {
 			NextState++;
 			if(NextState == 4)
 				NextState = State.GAME;
+		}else if(typed.equals("ENTER")) {
+			switch(NextState) {
+				case State.GAME:
+					return new GameState();
+				case State.RANKING:
+					return new RankingState();
+				case State.HELP:
+					return new HelpState();
+				default:
+					break;			
+			}
 		}
 		return this;
 	}
 
 	@Override
-	public State processMousePressed(int x, int y) {
-		return this;
-	}
-
-	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(file.back,backx,0, null);
+		g.drawImage(file.back,-500,0, null);
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		g.setColor(Color.black);
 		g.drawString("TypingJump", 275, 100);
@@ -59,7 +63,6 @@ public class TitleState implements State {
 		default:
 			break;
 		}
-		//g.drawString(Integer.toString(NextState), 400, 200);
 	}
 
 }
