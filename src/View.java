@@ -17,6 +17,7 @@ public class View extends JPanel {
     // Sample instance variables:
     private Image image;
     private AudioClip sound;
+    private String s =""; 
 
     public View(Model model) {
         this.model = model;
@@ -35,30 +36,18 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
         // 画面をいったんクリア
        clear(g);
-       //日本国旗
-       g.setColor(Color.white);
-       g.fillRect(10, 10, 300, 200);
-       g.setColor(Color.RED);
-       g.fillOval(310/2-60,210/2-60, 120, 120);
-       
-       //アイスランド国旗
-       g.setColor(Color.BLUE);
-       g.fillRect(250, 250 ,300, 200);
+       g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
        g.setColor(Color.WHITE);
-       g.fillRect(325, 250, 50, 200);
-       g.fillRect(250, 325, 300, 50);
-       g.setColor(Color.RED);
-       g.fillRect(337, 250, 25, 200);
-       g.fillRect(250, 337, 300, 25);
-        // 描画する
-        /*g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-        g.setColor(Color.WHITE);
-        g.drawString("Time: " + model.getTime(), 100, 200);
-        g.drawString("Key Typed: " + model.getTypedChar(), 100, 250);
-        g.drawString("Mouse Pressed: " + model.getMX() + "," + model.getMY(), 100, 300);*/
+       g.drawString("Time: " + model.getTime(), 100, 200);
+       g.drawString("Key Typed: " + s, 100, 250);
+       g.drawString("Mouse Pressed: " + model.getMX() + "," + model.getMY(), 100, 300);//*/
 
         // 画像の表示例
         //g.drawImage(image, model.getMX(), model.getMY(), this);
+    }
+    
+    public void reloadText() {
+    	s+=model.getTypedChar();
     }
 
     /**
@@ -76,8 +65,4 @@ public class View extends JPanel {
         sound.play(); // 再生する
     }
     
-    public void drawJFlag(Graphics g,int x,int y,int w) {
-    	
-    }
-
 }

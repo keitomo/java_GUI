@@ -20,6 +20,7 @@ public class Model {
 
     public synchronized void processKeyTyped(String typed) {
         typedChar = typed;
+        view.reloadText();
         view.repaint();
     }
 
