@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
@@ -26,6 +27,7 @@ public class View extends JPanel {
        
        State state = model.getState();
        state.paintComponent(g);//
+       Toolkit.getDefaultToolkit().sync();
        
        /*g.setColor(Color.red);
        g.drawLine(400, 0, 400, 600);
