@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 public class GameState implements State {
@@ -7,7 +5,7 @@ public class GameState implements State {
 	 * ゲーム　State
 	 */
 	
-	private GameFiles file = GameFiles.getInstance();
+	//private GameFiles file = GameFiles.getInstance();
 	private int limitTime = 0;
 	private int time=0;
 

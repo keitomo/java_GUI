@@ -28,6 +28,7 @@ public class HelpState implements State {
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-700,0, null);
 		g.drawString("遊び方", 350, 100);
+		g.drawString("鋭意執筆中",300,400);
 		g.drawString("スペースキーで戻る", 400, 550);
 
 	}

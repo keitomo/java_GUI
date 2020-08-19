@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 public class RankingState implements State {
@@ -25,6 +23,9 @@ public class RankingState implements State {
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
 		g.drawString("Ranking", 315, 100);
+		g.drawString("1:記録なし", 315, 300);
+		g.drawString("2:記録なし", 315, 400);
+		g.drawString("3:記録なし", 315, 500);
 		g.drawString("スペースキーで戻る", 400, 550);
 	}
 
