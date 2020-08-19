@@ -9,11 +9,13 @@ public class Model {
     private String typedChar = "";
     private int mx;
     private int my;
+    private Game game;
 
-    public Model() {
+    public Model(Game game) {
         view = new View(this);
         controller = new Controller(this);
         state = new TitleState();
+        this.game = game;
     }
 
     public synchronized void processTimeElapsed(int msec) {
@@ -27,7 +29,8 @@ public class Model {
         view.reloadText();
         state = state.processKeyTyped(typed);
         if(typed.equals("ALT")) {
-        	State new_state = new BossState(state);
+        	game.setBossWindow();
+        	State new_state = new BossState(state,game);
         	state = new_state;
         }
         //view.repaint();

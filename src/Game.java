@@ -1,3 +1,6 @@
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
@@ -7,19 +10,22 @@ public class Game extends JFrame {
     public static final int WIN_HEIGHT = 600;
     /** 初期ウィンドウサイズ（幅） */
     public static final int WIN_WIDTH = 800;
+    
+    public static int DIS_WIDTH;
+    public static int DIS_HEIGHT;
 
     private Model model = null;
 
     public Game() {
-        // Window タイトルの設定
-        setTitle("GUI Sample");
+    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    	DIS_WIDTH = screenSize.width;
+    	DIS_HEIGHT = screenSize.height;
+    	resetWindow();
         // Window を閉じるボタンを有効にする
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Window サイズの設定
-        setSize(WIN_WIDTH, WIN_HEIGHT);
 
         // モデルの生成
-        model = new Model();
+        model = new Model(this);
 
         // この Window に view を登録
         setContentPane(model.getView());
@@ -40,5 +46,15 @@ public class Game extends JFrame {
     public static void main(String[] args) {
         Game game = new Game();
         game.start();
+    }
+    
+    public void setBossWindow() {
+    	setTitle("Llbre0ffice wr1ter");
+    	setSize(DIS_WIDTH, DIS_HEIGHT);
+    }
+    
+    public void resetWindow() {
+    	setTitle("TypingJump");
+    	setSize(WIN_WIDTH, WIN_HEIGHT);
     }
 }
