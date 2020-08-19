@@ -3,16 +3,21 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 public class TitleState implements State {
+	/*
+	 * タイトル　State
+	 */
 	
-	private int NextState = 1;
+	private int NextState = 1; //次のState番号
 	private GameFiles file = GameFiles.getInstance();
 
 	@Override
+	//時間経過時の処理
 	public State processTimeElapsed(int msec) {
 		return this;
 	}
 
 	@Override
+	//キー入力されたときの処理
 	public State processKeyTyped(String typed) {
 		if(typed.equals("UP")) {
 			NextState--;
@@ -39,6 +44,7 @@ public class TitleState implements State {
 	}
 
 	@Override
+	//画面描画処理
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));

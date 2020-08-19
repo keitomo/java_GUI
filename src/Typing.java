@@ -1,5 +1,8 @@
 
 public class Typing {
+	/*
+	 * ゲームの主要処理をするクラス（予定）
+	 */
 
 	private Text text;
 	String input = "";

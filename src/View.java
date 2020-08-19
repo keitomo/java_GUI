@@ -1,11 +1,6 @@
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
@@ -13,15 +8,10 @@ import javax.swing.JPanel;
 public class View extends JPanel {
 
     private Model model;
-    private AudioClip sound;
-    private String s =""; 
     private GameFiles file;
 
     public View(Model model) {
         this.model = model;
-
-        // サウンドを読み込む
-        sound = Applet.newAudioClip(getClass().getResource("bomb.wav"));
         file = GameFiles.getInstance();
     }
 
@@ -54,14 +44,6 @@ public class View extends JPanel {
         
     }
     
-    public void reloadText() {
-    	if (model.getTypedChar().equals(" ")){
-    		s="";
-    	}
-    	else
-    		s+=model.getTypedChar();
-    }
-
     /**
      * 画面を黒色でクリア
      * @param g  描画用のグラフィックスオブジェクト
@@ -71,10 +53,11 @@ public class View extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, size.width, size.height);
     }
-
+    
+    /*
     public void playBombSound() {
         sound.stop(); // まず音を停めてから
         sound.play(); // 再生する
-    }
+    }*/
     
 }

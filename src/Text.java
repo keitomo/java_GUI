@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Text {
+	/*
+	 * 問題を読み込んだりローマ字を変換したりするクラス
+	 */
 	
 	private RandomNumGen random = RandomNumGen.getInstance();
 	private ArrayList<String> WordList = new ArrayList<String>();
@@ -69,6 +72,9 @@ public class Text {
 	  }
 	
 	private void setKana2Rome() {
+		/*
+		 * ひらがなをローマ字に変換するためのマップ
+		 */
 		m.put("あ", "a");m.put("い", "i");m.put("う", "u");m.put("え", "e");m.put("お", "o");
 		m.put("か", "ka");m.put("き", "ki");m.put("く", "ku");m.put("け", "ke");m.put("こ", "ko");
 		m.put("さ", "sa");m.put("し", "shi");m.put("す", "su");m.put("せ", "se");m.put("そ", "so");
@@ -97,12 +103,15 @@ public class Text {
 		m.put("びゃ", "bya");m.put("びゅ", "byu");m.put("びょ", "byo");
 		m.put("ぴゃ", "pya");m.put("ぴゅ", "pyu");m.put("ぴょ", "pyo");
 		m.put("ふぁ","fa");m.put("ふぃ","fi");m.put("ふぇ","fe");m.put("ふぉ","fo");
-		m.put("しぇ","sye");m.put("ちぇ","che");m.put("てぃ","tei");m.put("しぇ","sye");
+		m.put("しぇ","sye");m.put("ちぇ","che");m.put("てぃ","tei");
 		m.put("うぃ","wi");m.put("うぇ", "we");
 		m.put("ー", "-");
 	}
 	
 	public String kana2rome(String s) {
+		/*
+		 * ひらがなをローマ字に変換した結果を返す関数
+		 */
 		StringBuilder t = new StringBuilder();
 		for ( int i = 0; i < s.length(); i++ ) {
 			if ( i <= s.length() - 2 )  {

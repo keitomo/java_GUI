@@ -19,19 +19,18 @@ public class Model {
     public synchronized void processTimeElapsed(int msec) {
         time++;
         state = state.processTimeElapsed(time);
-        view.repaint();
+        repaint();
     }
 
     public synchronized void processKeyTyped(String typed) {
         typedChar = typed;
-        view.reloadText();
         state = state.processKeyTyped(typed);
-        if(typed.equals("ALT")) {
+        if(typed.equals("ALT")) { //ALTキーでボスが来た画面に移行
         	game.setBossWindow();
         	State new_state = new BossState(state,game);
         	state = new_state;
         }
-        //view.repaint();
+       repaint();
     }
 
     public void start() {

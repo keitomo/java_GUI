@@ -9,7 +9,7 @@ import javax.swing.Timer;
 
 public class Controller implements ActionListener, KeyListener, MouseListener {
 
-    private static final int DELAY = 100; // msec
+    private static final int DELAY = 100; // ミリ秒
     private Model model;
     private Timer timer;
 
@@ -36,22 +36,22 @@ public class Controller implements ActionListener, KeyListener, MouseListener {
     @Override
     public void keyPressed(KeyEvent e) {
     	switch(e.getKeyCode()) {
-    	case KeyEvent.VK_ENTER:
+    	case KeyEvent.VK_ENTER://Enterが押されたら
     		model.processKeyTyped("ENTER");
     		break;
-    	case KeyEvent.VK_UP:
+    	case KeyEvent.VK_UP://矢印上を押されたら
     		model.processKeyTyped("UP");
     		break;
-    	case KeyEvent.VK_DOWN:
+    	case KeyEvent.VK_DOWN://矢印下を押されたら
     		model.processKeyTyped("DOWN");
     		break;
-    	case KeyEvent.VK_LEFT:
+    	case KeyEvent.VK_LEFT://矢印左を押されたら
     		model.processKeyTyped("LEFT");
     		break;
-    	case KeyEvent.VK_RIGHT:
+    	case KeyEvent.VK_RIGHT://矢印右を押されたら
     		model.processKeyTyped("RIGHT");
     		break;
-    	case KeyEvent.VK_ALT:
+    	case KeyEvent.VK_ALT://ALTが押されたら
     		model.processKeyTyped("ALT");
     		break;
     	default:

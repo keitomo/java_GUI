@@ -11,8 +11,8 @@ public class Game extends JFrame {
     /** 初期ウィンドウサイズ（幅） */
     public static final int WIN_WIDTH = 800;
     
-    public static int DIS_WIDTH;
-    public static int DIS_HEIGHT;
+    private int DIS_WIDTH;
+    private int DIS_HEIGHT;
 
     private Model model = null;
 
@@ -20,6 +20,7 @@ public class Game extends JFrame {
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     	DIS_WIDTH = screenSize.width;
     	DIS_HEIGHT = screenSize.height;
+    	//Windowのタイトルとサイズを設定
     	resetWindow();
         // Window を閉じるボタンを有効にする
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,11 +49,13 @@ public class Game extends JFrame {
         game.start();
     }
     
+    //ボスが来たときにタイトルと画面サイズを変える
     public void setBossWindow() {
     	setTitle("Llbre0ffice wr1ter");
     	setSize(DIS_WIDTH, DIS_HEIGHT);
     }
     
+    //タイトルと画面サイズをゲーム用に変える
     public void resetWindow() {
     	setTitle("TypingJump");
     	setSize(WIN_WIDTH, WIN_HEIGHT);
