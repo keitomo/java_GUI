@@ -36,7 +36,7 @@ public class GameState implements State {
 		View.scrollBack(g, time);
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		g.setColor(Color.black);
-		g.drawString("Time:"+Integer.toString(limitTime),0,100);
+		g.drawString("Time:"+Integer.toString(limitTime/10),0,50);
 		g.drawString("スペースキーで戻る", 400, 550);
 	}
 
