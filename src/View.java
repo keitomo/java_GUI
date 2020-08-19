@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class View extends JPanel {
 
     private Model model;
-    private GameFiles file;
+    private static GameFiles file;
 
     public View(Model model) {
         this.model = model;
@@ -52,6 +52,11 @@ public class View extends JPanel {
         Dimension size = getSize();
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, size.width, size.height);
+    }
+    
+    public static void scrollBack(Graphics g,int i) {
+    	g.drawImage(file.back, 0-i,0, null);
+    	g.drawImage(file.back, 1800-i,0, null);
     }
     
     /*

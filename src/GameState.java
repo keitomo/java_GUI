@@ -8,10 +8,17 @@ public class GameState implements State {
 	 */
 	
 	private GameFiles file = GameFiles.getInstance();
+	private int limitTime = 0;
+	private int time=0;
 
 	@Override
 	//時間経過時の処理
 	public State processTimeElapsed(int msec) {
+		limitTime++;
+		time+=18;
+		if(time==1800) {
+			time=0;
+		}
 		return this;
 	}
 
@@ -26,10 +33,10 @@ public class GameState implements State {
 	@Override
 	//画面描画処理
 	public void paintComponent(Graphics g) {
-		g.drawImage(file.back,-500,0, null);
+		View.scrollBack(g, time);
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		g.setColor(Color.black);
-		g.drawString("ゲーム画面開発中", 350, 100);
+		g.drawString("Time:"+Integer.toString(limitTime),0,100);
 		g.drawString("スペースキーで戻る", 400, 550);
 	}
 
