@@ -24,8 +24,6 @@ public class RankingState implements State {
 	//画面描画処理
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
-		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		g.setColor(Color.black);
 		g.drawString("Ranking", 315, 100);
 		g.drawString("スペースキーで戻る", 400, 550);
 	}

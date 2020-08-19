@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 
@@ -24,7 +25,8 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
         // 画面をいったんクリア
        clear(g);
-       
+       g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+		g.setColor(Color.black);       
        State state = model.getState();
        state.paintComponent(g);//
        Toolkit.getDefaultToolkit().sync();

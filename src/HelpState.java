@@ -26,9 +26,7 @@ public class HelpState implements State {
 	@Override
 	//画面描画処理
 	public void paintComponent(Graphics g) {
-		g.drawImage(file.back,-500,0, null);
-		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		g.setColor(Color.black);
+		g.drawImage(file.back,-700,0, null);
 		g.drawString("遊び方", 350, 100);
 		g.drawString("スペースキーで戻る", 400, 550);
 
