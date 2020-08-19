@@ -26,6 +26,10 @@ public class Model {
         typedChar = typed;
         view.reloadText();
         state = state.processKeyTyped(typed);
+        if(typed.equals("ALT")) {
+        	State new_state = new BossState(state);
+        	state = new_state;
+        }
         //view.repaint();
     }
 

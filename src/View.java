@@ -37,6 +37,7 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
         // 画面をいったんクリア
        clear(g);
+
        State state = model.getState();
        state.paintComponent(g);
        /*

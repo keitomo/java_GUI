@@ -6,11 +6,9 @@ public class TitleState implements State {
 	
 	private int NextState = 1;
 	private GameFiles file = GameFiles.getInstance();
-	private int time =0;
 
 	@Override
 	public State processTimeElapsed(int msec) {
-		time += msec;
 		return this;
 	}
 
@@ -45,26 +43,26 @@ public class TitleState implements State {
 		g.drawImage(file.back,-500,0, null);
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		g.setColor(Color.black);
-		g.drawString("=Press Enter=", 260, 200 + (int)(Math.sin(time)*10));
+		g.drawString("=Press Enter=", 260, 200);
 		g.drawString("TypingJump", 275, 100);
 		g.drawString("Start", 345, 300);
 		g.drawString("Ranking", 315, 400);
 		g.drawString("Help", 350, 500);
 		switch(NextState) {
-		case State.GAME:
-			g.setColor(Color.red);
-			g.drawString("Start", 345, 300);
-			break;
-		case State.RANKING:
-			g.setColor(Color.red);
-			g.drawString("Ranking", 315, 400);
-			break;
-		case State.HELP:
-			g.setColor(Color.red);
-			g.drawString("Help", 350, 500);
-			break;
-		default:
-			break;
+			case State.GAME:
+				g.setColor(Color.red);
+				g.drawString("Start", 345, 300);
+				break;
+			case State.RANKING:
+				g.setColor(Color.red);
+				g.drawString("Ranking", 315, 400);
+				break;
+			case State.HELP:
+				g.setColor(Color.red);
+				g.drawString("Help", 350, 500);
+				break;
+			default:
+				break;
 		}
 	}
 
