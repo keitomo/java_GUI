@@ -13,10 +13,6 @@ import javax.swing.JPanel;
 public class View extends JPanel {
 
     private Model model;
-
-    // Sample instance variables:
-    private Image image;
-    
     private AudioClip sound;
     private String s =""; 
     private GameFiles file;
@@ -37,11 +33,11 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
         // 画面をいったんクリア
        clear(g);
-
+       
        State state = model.getState();
-       state.paintComponent(g);
-       /*
-       g.setColor(Color.red);
+       state.paintComponent(g);//
+       
+       /*g.setColor(Color.red);
        g.drawLine(400, 0, 400, 600);
        g.drawLine(0, 300, 800, 300);
        
@@ -51,7 +47,6 @@ public class View extends JPanel {
        g.setColor(Color.WHITE);
        g.drawString("Time: " + model.getTime(), 100, 200);
        g.drawString("Key Typed: " + s, 100, 250);
-       /*g.drawString("Mouse Pressed: " + model.getMX() + "," + model.getMY(), 100, 300);
        g.setColor(Color.orange);
        g.fillRect(10, 420, 100, 30);
         // 画像の表示例

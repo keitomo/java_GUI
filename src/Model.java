@@ -7,8 +7,6 @@ public class Model {
     // Sample instance variables:
     private int time;
     private String typedChar = "";
-    private int mx;
-    private int my;
     private Game game;
 
     public Model(Game game) {
@@ -36,13 +34,6 @@ public class Model {
         //view.repaint();
     }
 
-    public synchronized void processMousePressed(int x, int y) {
-        mx = x;
-        my = y;
-        /*view.playBombSound();
-        view.repaint();*/
-    }
-
     public void start() {
         controller.start();
     }
@@ -61,14 +52,6 @@ public class Model {
 
     public String getTypedChar() {
         return typedChar;
-    }
-
-    public int getMX() {
-        return mx;
-    }
-
-    public int getMY() {
-        return my;
     }
     
     public void repaint() {

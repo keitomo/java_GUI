@@ -39,9 +39,6 @@ public class Controller implements ActionListener, KeyListener, MouseListener {
     	case KeyEvent.VK_ENTER:
     		model.processKeyTyped("ENTER");
     		break;
-    	case KeyEvent.VK_SPACE:
-    		model.processKeyTyped(" ");
-    		break;
     	case KeyEvent.VK_UP:
     		model.processKeyTyped("UP");
     		break;
@@ -74,7 +71,7 @@ public class Controller implements ActionListener, KeyListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        model.processMousePressed(e.getX(), e.getY());
+    	// do nothing
     }
 
     @Override
