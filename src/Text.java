@@ -20,25 +20,16 @@ public class Text {
 		setKana2Rome();
 	}
 	
-	public void setWordList(){
+	public void setWordList() throws IOException{
 		String HOME = System.getProperty("user.dir");
-		
-	    try{
-	      File file = new File(HOME + "/bin/text/word_list.txt");
-
-	      if (checkBeforeReadfile(file)){
-	        BufferedReader br = new BufferedReader(new FileReader(file));
-
+		File file = new File(HOME + "/bin/text/word_list.txt");
+	    try(BufferedReader br = new BufferedReader(new FileReader(file));){    	  
 	        String str;
 	        while((str = br.readLine()) != null){
 	        	WordList.add(str);
 	        }
 
 	        	br.close();
-	      	}else{
-	      		System.out.println("ファイルが見つからないか開けません");
-	      		return;
-	      	}
 	    	}catch(FileNotFoundException e){
 	    		return;
 	    	}catch(IOException e){
