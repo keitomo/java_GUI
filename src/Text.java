@@ -24,7 +24,7 @@ public class Text {
 		String HOME = System.getProperty("user.dir");
 		
 	    try{
-	      File file = new File(HOME + "/text/word_list.txt");
+	      File file = new File(HOME + "/bin/text/word_list.txt");
 
 	      if (checkBeforeReadfile(file)){
 	        BufferedReader br = new BufferedReader(new FileReader(file));
@@ -37,14 +37,12 @@ public class Text {
 	        	br.close();
 	      	}else{
 	      		System.out.println("ファイルが見つからないか開けません");
-	      		System.exit(0);
+	      		return;
 	      	}
 	    	}catch(FileNotFoundException e){
-	    		System.out.println(e);
-	    		System.exit(0);
+	    		return;
 	    	}catch(IOException e){
-	    		System.out.println(e);
-	    		System.exit(0);
+	    		return;
 	    	}
 	    }
 	
