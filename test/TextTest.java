@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -46,7 +47,11 @@ public class TextTest {
 	@Test
 	public void ファイルがあるかどうか検知する() {
 		Text text = new Text();
-		text.setWordList();
+		try {
+			text.setWordList();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		text.getRandomWord();	
 	}
 
