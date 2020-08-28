@@ -31,8 +31,8 @@ public class HelpState implements State {
 	//画面描画処理
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-700,0, null);
-		g.drawString("遊び方", 350, 100);
-		g.drawString(Integer.toString(page)+"/4", 350, 500);
+		g.drawString("遊び方", 340, 100);
+		g.drawString(Integer.toString(page)+"/4",370, 500);
 		g.drawString("スペースキーで戻る", 400, 550);
 		switch(page) {
 			case 1:

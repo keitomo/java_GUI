@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,17 +13,18 @@ public class Text {
 	 * 問題を読み込んだりローマ字を変換したりするクラス
 	 */
 	
-	private RandomNumGen random = RandomNumGen.getInstance();
+	private RandomNumGen random;
 	private ArrayList<String> wordList = new ArrayList<String>();
 	static Map<String, String> m = new HashMap<String, String>();
 	
 	public Text() {
 		setKana2Rome();
+		random = RandomNumGen.getInstance();
 	}
 	
 	public void setWordList() throws IOException{
-		String home = System.getProperty("user.dir");
-		File file = new File(home + "/bin/text/word_list.txt");
+		URL url = getClass().getResource("text/word_list.txt");
+		File file = new File(url.getPath());
 	    try(BufferedReader br = new BufferedReader(new FileReader(file));){    	  
 	        String str;
 	        while((str = br.readLine()) != null){
