@@ -22,11 +22,11 @@ public class TitleState implements State {
 		if(typed.equals("UP")) {
 			nextState--;
 			if(nextState == 0)
-				nextState = State.HELP;
+				nextState = 4;
 		}
 		else if(typed.equals("DOWN")) {
 			nextState++;
-			if(nextState == 4)
+			if(nextState == 5)
 				nextState = State.GAME;
 		}else if(typed.equals("ENTER")) {
 			switch(nextState) {
@@ -36,6 +36,8 @@ public class TitleState implements State {
 					return new RankingState();
 				case State.HELP:
 					return new HelpState();
+				case 4:
+					System.exit(0);
 				default:
 					break;			
 			}
@@ -47,23 +49,29 @@ public class TitleState implements State {
 	//画面描画処理
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
-		g.drawString("=Press Enter=", 260, 200);
-		g.drawString("TypingJump", 275, 100);
-		g.drawString("Start", 345, 300);
-		g.drawString("Ranking", 315, 400);
-		g.drawString("Help", 350, 500);
+		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+		g.drawString("=Press Enter=", 300, 150);
+		g.drawString("TypingJump", 310, 100);
+		g.drawString("Start", 360, 250);
+		g.drawString("Ranking", 340, 325);
+		g.drawString("Help", 365, 400);
+		g.drawString("Exit", 365, 475);
 		switch(nextState) {
 			case State.GAME:
 				g.setColor(Color.red);
-				g.drawString("Start", 345, 300);
+				g.drawString("Start", 360, 250);
 				break;
 			case State.RANKING:
 				g.setColor(Color.red);
-				g.drawString("Ranking", 315, 400);
+				g.drawString("Ranking", 340, 325);
 				break;
 			case State.HELP:
 				g.setColor(Color.red);
-				g.drawString("Help", 350, 500);
+				g.drawString("Help", 365, 400);
+				break;
+			case 4:
+				g.setColor(Color.red);
+				g.drawString("Exit", 365, 475);
 				break;
 			default:
 				break;
