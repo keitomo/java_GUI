@@ -5,7 +5,7 @@ public class GameState implements State {
 	 * ゲーム　State
 	 */
 	
-	//private GameFiles file = GameFiles.getInstance();
+	private GameFiles file = GameFiles.getInstance();
 	private int limitTime = 0;
 	private int time=0;
 
@@ -31,7 +31,8 @@ public class GameState implements State {
 	@Override
 	//画面描画処理
 	public void paintComponent(Graphics g) {
-		View.scrollBack(g, time);
+		g.drawImage(file.back, 0-time,0, null);
+    	g.drawImage(file.back, 1800-time,0, null);
 		g.drawString("Time:"+Integer.toString(limitTime/10),0,50);
 		g.drawString("スペースキーで戻る", 400, 550);
 	}

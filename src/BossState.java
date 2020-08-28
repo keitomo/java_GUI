@@ -7,12 +7,12 @@ public class BossState implements State {
 	
 	private GameFiles file = GameFiles.getInstance();
 	//ボスが来たに遷移してくる前のStateを保持する変数
-	private State before_state;
+	private State beforState;
 	//画面をボスが来た仕様にするためにgameを保持する
 	private Game game;
 	
 	public BossState(State s,Game game){
-		this.before_state=s;
+		this.beforState=s;
 		this.game = game;
 	}
 
@@ -27,7 +27,7 @@ public class BossState implements State {
 	public State processKeyTyped(String typed) {
 		if(typed.equals("ESC")) {
 			game.resetWindow();
-			return before_state;
+			return beforState;
 		}
 		return this;
 	}

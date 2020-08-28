@@ -27,8 +27,8 @@ public class Model {
         state = state.processKeyTyped(typed);
         if(typed.equals("ALT")) { //ALTキーでボスが来た画面に移行
         	game.setBossWindow();
-        	State new_state = new BossState(state,game);
-        	state = new_state;
+        	State newState = new BossState(state,game);
+        	state = newState;
         }
        repaint();
     }

@@ -13,7 +13,7 @@ public class Text {
 	 */
 	
 	private RandomNumGen random = RandomNumGen.getInstance();
-	private ArrayList<String> WordList = new ArrayList<String>();
+	private ArrayList<String> wordList = new ArrayList<String>();
 	static Map<String, String> m = new HashMap<String, String>();
 	
 	public Text() {
@@ -21,12 +21,12 @@ public class Text {
 	}
 	
 	public void setWordList() throws IOException{
-		String HOME = System.getProperty("user.dir");
-		File file = new File(HOME + "/bin/text/word_list.txt");
+		String home = System.getProperty("user.dir");
+		File file = new File(home + "/bin/text/word_list.txt");
 	    try(BufferedReader br = new BufferedReader(new FileReader(file));){    	  
 	        String str;
 	        while((str = br.readLine()) != null){
-	        	WordList.add(str);
+	        	wordList.add(str);
 	        }
 
 	        	br.close();
@@ -38,8 +38,8 @@ public class Text {
 	    }
 	
 	public String getRandomWord() {
-		int randomValue = random.nextInt(WordList.size());
-		return kana2rome(WordList.get(randomValue));
+		int randomValue = random.nextInt(wordList.size());
+		return kana2rome(wordList.get(randomValue));
 	}
 
 	public static boolean checkText(String problem, char input,int count) {
@@ -51,12 +51,9 @@ public class Text {
 	}
 	
 	private static boolean checkBeforeReadfile(File file){
-	    if (file.exists()){
-	      if (file.isFile() && file.canRead()){
-	        return true;
-	      }
+	    if (file.exists() && file.isFile() && file.canRead()){
+	    	return true;
 	    }
-
 	    return false;
 	  }
 	

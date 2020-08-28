@@ -19,12 +19,10 @@ public class HelpState implements State {
 	public State processKeyTyped(String typed) {
 		if(typed.equals(" "))
 			return new TitleState();
-		else if(typed.equals("RIGHT")) {
-			if(page<4)
-				page++;
-		}else if(typed.equals("LEFT")) {
-			if(page>1)
-				page--;
+		else if(typed.equals("RIGHT") && page < 4) {
+			page++;
+		}else if(typed.equals("LEFT") && page > 1) {
+			page--;
 		}
 		return this;
 	}
