@@ -7,7 +7,7 @@ public class TitleState implements State {
 	 * タイトル　State
 	 */
 	
-	private int NextState = 1; //次のState番号
+	private int nextState = 1; //次のState番号
 	private GameFiles file = GameFiles.getInstance();
 
 	@Override
@@ -20,16 +20,16 @@ public class TitleState implements State {
 	//キー入力されたときの処理
 	public State processKeyTyped(String typed) {
 		if(typed.equals("UP")) {
-			NextState--;
-			if(NextState == 0)
-				NextState = State.HELP;
+			nextState--;
+			if(nextState == 0)
+				nextState = State.HELP;
 		}
 		else if(typed.equals("DOWN")) {
-			NextState++;
-			if(NextState == 4)
-				NextState = State.GAME;
+			nextState++;
+			if(nextState == 4)
+				nextState = State.GAME;
 		}else if(typed.equals("ENTER")) {
-			switch(NextState) {
+			switch(nextState) {
 				case State.GAME:
 					return new GameState();
 				case State.RANKING:
@@ -52,7 +52,7 @@ public class TitleState implements State {
 		g.drawString("Start", 345, 300);
 		g.drawString("Ranking", 315, 400);
 		g.drawString("Help", 350, 500);
-		switch(NextState) {
+		switch(nextState) {
 			case State.GAME:
 				g.setColor(Color.red);
 				g.drawString("Start", 345, 300);

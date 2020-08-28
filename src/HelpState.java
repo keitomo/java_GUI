@@ -36,6 +36,18 @@ public class HelpState implements State {
 		g.drawString("遊び方", 350, 100);
 		g.drawString(Integer.toString(page)+"/4", 350, 500);
 		g.drawString("スペースキーで戻る", 400, 550);
+		switch(page) {
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			default:
+				break;
+		}
 
 	}
 

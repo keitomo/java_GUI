@@ -25,7 +25,7 @@ public class BossState implements State {
 	@Override
 	//キー入力されたときの処理
 	public State processKeyTyped(String typed) {
-		if(typed.equals("RIGHT")) {
+		if(typed.equals("ESC")) {
 			game.resetWindow();
 			return before_state;
 		}

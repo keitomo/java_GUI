@@ -54,6 +54,9 @@ public class Controller implements ActionListener, KeyListener, MouseListener {
     	case KeyEvent.VK_ALT://ALTが押されたら
     		model.processKeyTyped("ALT");
     		break;
+    	case KeyEvent.VK_ESCAPE://ESCが押されたら
+    		model.processKeyTyped("ESC");
+    		break;
     	default:
     		break;
     	}
