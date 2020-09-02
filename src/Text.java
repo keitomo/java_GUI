@@ -51,14 +51,7 @@ public class Text {
 	public static boolean matchText(String problem, String input) {
 		return problem.equals(input);
 	}
-	
-	private static boolean checkBeforeReadfile(File file){
-	    if (file.exists() && file.isFile() && file.canRead()){
-	    	return true;
-	    }
-	    return false;
-	  }
-	
+		
 	private void setKana2Rome() {
 		/*
 		 * ひらがなをローマ字に変換するためのマップ

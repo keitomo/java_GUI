@@ -4,7 +4,13 @@ public class TypingGame {
 	/*
 	 * ゲームの主要処理をするクラス（予定）
 	 */
-
+	
+	public static final int HOLE = 0;
+	public static final int WOOD = 1;
+	public static final int GOAL = 2;
+	
+	private RandomNumGen random;
+	private static final int MAP=10;
 	private Text text;
 	String input = "";
 	String problem[] = {"",""};
@@ -15,7 +21,10 @@ public class TypingGame {
 	private int time=0;
 	private int timeLimit=3000;
 	private int selectProblem = -1;
-	
+	private boolean clearFlag=false;
+	private boolean problemFlag=false;
+	private int map[];
+
 	public TypingGame() {
 		text = new Text();
 		try {
@@ -23,19 +32,36 @@ public class TypingGame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		map = new int[MAP+1];
+		random = RandomNumGen.getInstance();
 		setGame();
 	}
 
 	private void setGame() {
-		remainingProblemNum=20;
+		remainingProblemNum=MAP;
+		setMap();
 		setProblem(0);
 		setProblem(1);
 	}
 	
+	private void setMap() {
+		map[0]=WOOD;
+		for(int i=1;i<MAP;i++) {
+			map[i]=WOOD;
+			int value=random.nextInt(100);
+			if(value<30)
+				map[i]=HOLE;
+			if(map[i-1]==HOLE && map[i] == HOLE) {
+				map[i] = WOOD;
+			}
+		}
+		map[MAP]=GOAL;
+	}
+	
 	private void setProblem(int i) {
-		do {
+		do{
 			problem[i] = text.getRandomWord();
-		}while(problem[0]==problem[1]);
+		}while(problem[0].equals(problem[1]));
 	}
 		
 	public int getTime() {
@@ -52,6 +78,10 @@ public class TypingGame {
 	
 	public int getRemainingProblem() {
 		return remainingProblemNum;
+	}
+	
+	public int getClearProblem() {
+		return MAP-remainingProblemNum;
 	}
 
 	public String getInput() {
@@ -74,6 +104,22 @@ public class TypingGame {
 		double missType = (double)inputNum - (double)matchNum;
 		double score = (((double)inputNum-missType)/(double)inputNum)*100;
 		return ((double)Math.round(score * 10))/10;
+	}
+	
+	public boolean getClearFlag() {
+		return clearFlag;
+	}
+	
+	public boolean getProblemFlag() {
+		return problemFlag;
+	}
+	
+	public void resetProblemFlag() {
+		problemFlag = false;
+	}
+	
+	public int[] getMap() {
+		return map;
 	}
 
 	
@@ -98,11 +144,20 @@ public class TypingGame {
 					checkNum++;
 					matchNum++;
 					input += event;
+					for(int i=0;i<problem.length;i++) {
+						if(Text.matchText(problem[i],input)) {
+							selectProblem=i;
+						}
+					}	
 					break;
 				default:
 					if(Text.matchText(problem[selectProblem],input) && event.equals("ENTER") && remainingProblemNum!=0) {
 						setProblem(selectProblem);
-						remainingProblemNum--;
+						int checkMap = MAP-remainingProblemNum+selectProblem+1;
+						if(checkMap >= 0 && checkMap <= MAP && 	map[checkMap]!=HOLE) {
+							remainingProblemNum-=selectProblem+1;
+							problemFlag = true;
+						}
 						checkNum=0;
 						input = "";
 						selectProblem=-1;
@@ -111,12 +166,12 @@ public class TypingGame {
 						checkNum++;
 						matchNum++;
 						input += event;
+					}if(remainingProblemNum<=0) {
+						clearFlag=true;
 					}
 					break;
 				}
-				
-
-			
+						
 		}
 	}
 }
