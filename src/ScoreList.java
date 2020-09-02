@@ -14,30 +14,30 @@ public class ScoreList {
 	 * ゲームのスコアのリストクラス
 	 * Singleton　パターンを利用
 	 */
-	private ArrayList<String> ScoreString ;
-	private ArrayList<Score> ScoreList ;
-	private static ScoreList scoreList;
+	private ArrayList<String> scoreString ;
+	private ArrayList<Score> scoreList ;
+	private static ScoreList scoreListInstance;
 	
 	private ScoreList() {
-		ScoreString = new ArrayList<String>();
-		ScoreList = new ArrayList<Score>();
+		scoreString = new ArrayList<>();
+		scoreList = new ArrayList<>();
 	}	
 	
 	public static ScoreList getInstance() {
-		if (scoreList == null)
-			scoreList = new ScoreList();
-		return scoreList;
+		if (scoreListInstance == null)
+			scoreListInstance = new ScoreList();
+		return scoreListInstance;
 	}
 	
 	private void loadScore() {
-		ScoreString = new ArrayList<String>();
-		ScoreList = new ArrayList<Score>();
+		scoreString = new ArrayList<>();
+		scoreList = new ArrayList<>();
 		URL url = getClass().getResource("text/score.txt");
 		File file = new File(url.getPath());
 	    try(BufferedReader brScore = new BufferedReader(new FileReader(file));){    	  
 	        String str;
 	        while((str = brScore.readLine()) != null){
-	        	ScoreString.add(str);
+	        	scoreString.add(str);
 	        }
 
 	        	brScore.close();
@@ -47,15 +47,11 @@ public class ScoreList {
 	    	}catch(IOException e){
 	    		System.out.println("ファイルを読み込みできませんでした");
 	    		System.exit(0);
-	    	}
-
-		
-			for(int i=0;i<ScoreString.size();i++) {
-				String Temp = ScoreString.get(i);
-				ScoreList.add(new Score( Integer.parseInt(Temp.split(" ")[0]),Temp.split(" ")[1]));
-			}
-		
-		    
+	    	}		
+			for(int i=0;i<scoreString.size();i++) {
+				String temp = scoreString.get(i);
+				scoreList.add(new Score( Integer.parseInt(temp.split(" ")[0]),temp.split(" ")[1]));
+			}	    
 		}
 	
 	
@@ -77,14 +73,14 @@ public class ScoreList {
 
 	
 	private void sortScoreList() {
-		Collections.sort(ScoreList, new ScoreComparator());
+		Collections.sort(scoreList, new ScoreComparator());
 	}
 	
 	public Score getScore(int rank) {
 		loadScore();
 		sortScoreList();
 		try {
-			return ScoreList.get(rank);
+			return scoreList.get(rank);
 		}catch(IndexOutOfBoundsException e) {
 			return new Score(0,"00/00/00");
 		}

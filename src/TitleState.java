@@ -6,7 +6,11 @@ public class TitleState implements State {
 	/*
 	 * タイトル　State
 	 */
-	
+	//各Stateに番号を割り振っておく
+	public static final int GAME = 1;
+	public static final int RANKING = 2;
+	public static final int HELP = 3;
+	public static final int EXIT = 4;	
 	private int nextState = 1; //次のState番号
 
 	@Override
@@ -26,17 +30,18 @@ public class TitleState implements State {
 		else if(typed.equals("DOWN")) {
 			nextState++;
 			if(nextState == 5)
-				nextState = State.GAME;
+				nextState = GAME;
 		}else if(typed.equals("ENTER")) {
 			switch(nextState) {
-				case State.GAME:
+				case GAME:
 					return new GameState();
-				case State.RANKING:
+				case RANKING:
 					return new RankingState();
-				case State.HELP:
+				case HELP:
 					return new HelpState();
-				case 4:
+				case EXIT:
 					System.exit(0);
+					break;
 				default:
 					break;			
 			}
@@ -56,19 +61,19 @@ public class TitleState implements State {
 		View.drawStringCenter(g, "Help", 400,400);
 		View.drawStringCenter(g, "Exit", 400,475);
 		switch(nextState) {
-			case State.GAME:
+			case GAME:
 				g.setColor(Color.red);
 				View.drawStringCenter(g, "Start",400, 250);
 				break;
-			case State.RANKING:
+			case RANKING:
 				g.setColor(Color.red);
 				View.drawStringCenter(g, "Ranking",400, 325);
 				break;
-			case State.HELP:
+			case HELP:
 				g.setColor(Color.red);
 				View.drawStringCenter(g, "Help",400, 400);
 				break;
-			case 4:
+			case EXIT:
 				g.setColor(Color.red);
 				View.drawStringCenter(g, "Exit",400, 475);
 				break;

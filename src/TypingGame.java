@@ -13,7 +13,7 @@ public class TypingGame {
 	private static final int MAP=10;
 	private Text text;
 	String input = "";
-	String problem[] = {"",""};
+	String[] problem = {"",""};
 	private int inputNum=0;
 	private int checkNum=0;
 	private int matchNum=0;
@@ -24,7 +24,7 @@ public class TypingGame {
 	private int problemCount=0;
 	private boolean clearFlag=false;
 	private boolean problemFlag=false;
-	private int map[];
+	private int[] stageMap;
 
 	public TypingGame() {
 		text = new Text();
@@ -33,7 +33,7 @@ public class TypingGame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		map = new int[MAP+1];
+		stageMap = new int[MAP+1];
 		random = RandomNumGen.getInstance();
 		setGame();
 	}
@@ -46,17 +46,17 @@ public class TypingGame {
 	}
 	
 	private void setMap() {
-		map[0]=WOOD;
+		stageMap[0]=WOOD;
 		for(int i=1;i<MAP;i++) {
-			map[i]=WOOD;
+			stageMap[i]=WOOD;
 			int value=random.nextInt(100);
 			if(value<30)
-				map[i]=HOLE;
-			if(map[i-1]==HOLE && map[i] == HOLE) {
-				map[i] = WOOD;
+				stageMap[i]=HOLE;
+			if(stageMap[i-1]==HOLE && stageMap[i] == HOLE) {
+				stageMap[i] = WOOD;
 			}
 		}
-		map[MAP]=GOAL;
+		stageMap[MAP]=GOAL;
 	}
 	
 	private void setProblem(int i) {
@@ -124,7 +124,7 @@ public class TypingGame {
 	}
 	
 	public int[] getMap() {
-		return map;
+		return stageMap;
 	}
 
 	
@@ -134,50 +134,45 @@ public class TypingGame {
 			timeLimit--;
 		}else {
 			inputNum++;
-			switch(selectProblem) {
-				case -1:
-					if(Text.checkText(problem[0],problem[1].charAt(checkNum),checkNum)&&
-						Text.checkText(problem[0], event.charAt(0), checkNum)) {	
-						selectProblem = -1;
-					}else if(Text.checkText(problem[0], event.charAt(0), checkNum)) {
-						selectProblem = 0;
-					}else if(Text.checkText(problem[1], event.charAt(0), checkNum)) {
-						selectProblem = 1;
-					}else {
-						break;
+			if(selectProblem==-1) {
+				if(Text.checkText(problem[0],problem[1].charAt(checkNum),checkNum)&&
+					Text.checkText(problem[0], event.charAt(0), checkNum)) {	
+					selectProblem = -1;
+				}else if(Text.checkText(problem[0], event.charAt(0), checkNum)) {
+					selectProblem = 0;
+				}else if(Text.checkText(problem[1], event.charAt(0), checkNum)) {
+					selectProblem = 1;
+				}
+				checkNum++;
+				matchNum++;
+				input += event;
+				for(int i=0;i<problem.length;i++) {
+					if(Text.matchText(problem[i],input)) {
+						selectProblem=i;
 					}
+				}	
+			}else {
+				if(Text.matchText(problem[selectProblem],input) && event.equals("ENTER") && remainingProblemNum!=0) {
+					setProblem(selectProblem);
+					int checkMap = MAP-remainingProblemNum+selectProblem+1;
+					if(checkMap >= 0 && checkMap <= MAP && 	stageMap[checkMap]!=HOLE) {
+						remainingProblemNum-=selectProblem+1;
+						problemFlag = true;
+					}
+					checkNum=0;
+					input = "";
+					selectProblem=-1;
+					problemCount+=1;
+				}else if(checkNum<problem[selectProblem].length()&&Text.checkText(problem[selectProblem], event.charAt(0), checkNum)) {
 					checkNum++;
 					matchNum++;
 					input += event;
-					for(int i=0;i<problem.length;i++) {
-						if(Text.matchText(problem[i],input)) {
-							selectProblem=i;
-						}
-					}	
-					break;
-				default:
-					if(Text.matchText(problem[selectProblem],input) && event.equals("ENTER") && remainingProblemNum!=0) {
-						setProblem(selectProblem);
-						int checkMap = MAP-remainingProblemNum+selectProblem+1;
-						if(checkMap >= 0 && checkMap <= MAP && 	map[checkMap]!=HOLE) {
-							remainingProblemNum-=selectProblem+1;
-							problemFlag = true;
-						}
-						checkNum=0;
-						input = "";
-						selectProblem=-1;
-						problemCount+=1;
-					}
-					else if(checkNum<problem[selectProblem].length()&&Text.checkText(problem[selectProblem], event.charAt(0), checkNum)) {
-						checkNum++;
-						matchNum++;
-						input += event;
-					}if(remainingProblemNum<=0) {
-						clearFlag=true;
-					}
-					break;
 				}
-						
+				
+				if(remainingProblemNum<=0) {
+					clearFlag=true;
+				}					
+			}						
 		}
 	}
 }

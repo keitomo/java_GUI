@@ -14,8 +14,8 @@ public class Text {
 	 */
 	
 	private RandomNumGen random;
-	private ArrayList<String> wordList = new ArrayList<String>();
-	static Map<String, String> m = new HashMap<String, String>();
+	private ArrayList<String> wordList = new ArrayList<>();
+	static Map<String, String> m = new HashMap<>();
 	
 	public Text() {
 		setKana2Rome();
@@ -104,7 +104,7 @@ public class Text {
 				} else if (m.containsKey(s.substring(i, i+1))) {
 					t.append(m.get(s.substring(i, i+1)));
 				} else if ( s.charAt(i) == 'っ' ) {
-					t.append(((String) m.get(s.substring(i+1, i+2))).charAt(0));
+					t.append((String.valueOf(m.get(s.substring(i+1, i+2))).charAt(0)));
 				} else {
 					t.append(s.charAt(i));
 		        }

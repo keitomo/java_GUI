@@ -3,11 +3,11 @@ import java.util.Calendar;
 
 public class Score {
 	private String date;
-	private int score;
+	private int scoreSec;
 	
 	public Score(int score,String date) {
 		this.date = date;
-		this.score = score;
+		this.scoreSec = score;
 	}
 
 	public String getDate() {
@@ -21,6 +21,6 @@ public class Score {
 	}
 
 	public int getScore() {
-		return score;
+		return scoreSec;
 	}	
 }
