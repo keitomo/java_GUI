@@ -8,7 +8,6 @@ public class TitleState implements State {
 	 */
 	
 	private int nextState = 1; //次のState番号
-	private GameFiles file = GameFiles.getInstance();
 
 	@Override
 	//時間経過時の処理
@@ -50,28 +49,28 @@ public class TitleState implements State {
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
-		g.drawString("=Press Enter=", 300, 150);
-		g.drawString("TypingJump", 310, 100);
-		g.drawString("Start", 360, 250);
-		g.drawString("Ranking", 340, 325);
-		g.drawString("Help", 365, 400);
-		g.drawString("Exit", 365, 475);
+		View.drawStringCenter(g, "TypingJump",400, 100);
+		View.drawStringCenter(g, "=Press Enter=",400, 150);
+		View.drawStringCenter(g, "Start", 400,250);
+		View.drawStringCenter(g, "Ranking", 400,325);
+		View.drawStringCenter(g, "Help", 400,400);
+		View.drawStringCenter(g, "Exit", 400,475);
 		switch(nextState) {
 			case State.GAME:
 				g.setColor(Color.red);
-				g.drawString("Start", 360, 250);
+				View.drawStringCenter(g, "Start",400, 250);
 				break;
 			case State.RANKING:
 				g.setColor(Color.red);
-				g.drawString("Ranking", 340, 325);
+				View.drawStringCenter(g, "Ranking",400, 325);
 				break;
 			case State.HELP:
 				g.setColor(Color.red);
-				g.drawString("Help", 365, 400);
+				View.drawStringCenter(g, "Help",400, 400);
 				break;
 			case 4:
 				g.setColor(Color.red);
-				g.drawString("Exit", 365, 475);
+				View.drawStringCenter(g, "Exit",400, 475);
 				break;
 			default:
 				break;

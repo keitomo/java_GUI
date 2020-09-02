@@ -6,7 +6,6 @@ public class GameState implements State {
 	 * ゲーム　State
 	 */
 	
-	private GameFiles file = GameFiles.getInstance();
 	private TypingGame game;
 	private int backPosX = 0;
 	private int animePos=0;
@@ -75,8 +74,8 @@ public class GameState implements State {
 				break;
 			}
 			g.fillRect(i*120-animePos+350, 420, 100, 30);
-			g.setColor(Color.red);
-			g.drawString(Integer.toString(i),i*120-animePos+390,450);
+			//g.setColor(Color.red);
+			//g.drawString(Integer.toString(i),i*120-animePos+390,450);
 		}
 		g.drawImage(file.mainChar,375 ,(int)(375+Math.abs(Math.sin((animePos*Math.PI)/120))*-100), null);
 

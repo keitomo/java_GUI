@@ -43,5 +43,9 @@ public class View extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, size.width, size.height);
     }
+    
+    public static void drawStringCenter(Graphics g,String str,int x,int y) {
+    	g.drawString(str, x-(g.getFontMetrics().stringWidth(str)/2), y);
+    }
        
 }

@@ -6,12 +6,11 @@ public class ClearState implements State {
 	 */
 	
 	private TypingGame game;
-	private GameFiles file = GameFiles.getInstance();
 	private ScoreList scoreList = ScoreList.getInstance();
 	
 	public ClearState(TypingGame game) {
 		this.game=game;
-		scoreList.writeScore(new Score(this.game.getTime()/10,Score.getNowDate()));	
+		scoreList.writeScore(new Score(game.getTime()/10,Score.getNowDate()));	
 	}
 
 	@Override
@@ -33,7 +32,8 @@ public class ClearState implements State {
 	//画面描画処理
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
-		g.drawString(Integer.toString(scoreList.getScore(0).getScore()),100,100);
+		View.drawStringCenter(g, Integer.toString(this.game.getTime()/10), 250, 150);
+		g.drawString("スペースキーで戻る", 400, 550);
 	}
 
 }
