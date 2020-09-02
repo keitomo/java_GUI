@@ -5,7 +5,7 @@ public class GameState implements State {
 	/*
 	 * ゲーム　State
 	 */
-	
+	private GameFiles file = GameFiles.getInstance();
 	private TypingGame gameData;
 	private int backPosX = 0;
 	private int animePos=0;

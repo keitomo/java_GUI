@@ -7,7 +7,7 @@ public class ClearState implements State {
 	
 	private TypingGame gameData;
 	private ScoreList scoreList = ScoreList.getInstance();
-	
+	private GameFiles file = GameFiles.getInstance();
 	public ClearState(TypingGame game) {
 		this.gameData=game;
 		scoreList.writeScore(new Score(game.getTime()/10,Score.getNowDate()));	

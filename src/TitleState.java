@@ -12,6 +12,8 @@ public class TitleState implements State {
 	public static final int HELP = 3;
 	public static final int EXIT = 4;	
 	private int nextState = 1; //次のState番号
+	
+	private GameFiles file = GameFiles.getInstance();
 
 	@Override
 	//時間経過時の処理

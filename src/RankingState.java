@@ -3,7 +3,7 @@ import java.awt.Graphics;
 public class RankingState implements State {
 	
 	private ScoreList scoreList = ScoreList.getInstance();
-
+	private GameFiles file = GameFiles.getInstance();
 	@Override
 	//時間経過時の処理
 	public State processTimeElapsed() {

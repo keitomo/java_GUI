@@ -15,12 +15,12 @@ public class ScoreList {
 	 * Singleton　パターンを利用
 	 */
 	private ArrayList<String> scoreString ;
-	private ArrayList<Score> scoreList ;
+	private ArrayList<Score> scoreDataList ;
 	private static ScoreList scoreListInstance;
 	
 	private ScoreList() {
 		scoreString = new ArrayList<>();
-		scoreList = new ArrayList<>();
+		scoreDataList = new ArrayList<>();
 	}	
 	
 	public static ScoreList getInstance() {
@@ -31,7 +31,7 @@ public class ScoreList {
 	
 	private void loadScore() {
 		scoreString = new ArrayList<>();
-		scoreList = new ArrayList<>();
+		scoreDataList = new ArrayList<>();
 		URL url = getClass().getResource("text/score.txt");
 		File file = new File(url.getPath());
 	    try(BufferedReader brScore = new BufferedReader(new FileReader(file));){    	  
@@ -39,8 +39,6 @@ public class ScoreList {
 	        while((str = brScore.readLine()) != null){
 	        	scoreString.add(str);
 	        }
-
-	        	brScore.close();
 	    	}catch(FileNotFoundException e){
 	    		System.out.println("ファイルを見つけることができませんでした");
 	    		System.exit(0);
@@ -50,7 +48,7 @@ public class ScoreList {
 	    	}		
 			for(int i=0;i<scoreString.size();i++) {
 				String temp = scoreString.get(i);
-				scoreList.add(new Score( Integer.parseInt(temp.split(" ")[0]),temp.split(" ")[1]));
+				scoreDataList.add(new Score( Integer.parseInt(temp.split(" ")[0]),temp.split(" ")[1]));
 			}	    
 		}
 	
@@ -61,7 +59,6 @@ public class ScoreList {
 	    try(BufferedWriter bwScore = new BufferedWriter(new FileWriter(file,true));){
 	    	bwScore.write(""+s.getScore()+" "+s.getDate());
 	       bwScore.newLine();
-	       bwScore.close();
 	    	}catch(FileNotFoundException e){
 	    		System.out.println("ファイルを見つけることができませんでした");
 	    		System.exit(0);
@@ -73,14 +70,14 @@ public class ScoreList {
 
 	
 	private void sortScoreList() {
-		Collections.sort(scoreList, new ScoreComparator());
+		Collections.sort(scoreDataList, new ScoreComparator());
 	}
 	
 	public Score getScore(int rank) {
 		loadScore();
 		sortScoreList();
 		try {
-			return scoreList.get(rank);
+			return scoreDataList.get(rank);
 		}catch(IndexOutOfBoundsException e) {
 			return new Score(0,"00/00/00");
 		}

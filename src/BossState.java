@@ -4,7 +4,7 @@ public class BossState implements State {
 	/*
 	 * ボスが来た　State
 	 */
-
+	private GameFiles file = GameFiles.getInstance();
 	//ボスが来たに遷移してくる前のStateを保持する変数
 	private State beforState;
 	//画面をボスが来た仕様にするためにgameを保持する

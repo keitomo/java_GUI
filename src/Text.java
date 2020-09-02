@@ -30,8 +30,6 @@ public class Text {
 	        while((str = brWord.readLine()) != null){
 	        	wordList.add(str);
 	        }
-
-	       brWord.close();
     	}catch(FileNotFoundException e){
     		System.out.println("ファイルを見つけることができませんでした");
     		System.exit(0);
