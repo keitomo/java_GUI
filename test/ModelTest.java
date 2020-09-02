@@ -9,7 +9,7 @@ public class ModelTest {
     public void モデルの管理する時刻データが時間経過とともに増えるかテスト() {
        Model model = new Model(null);
        int time = model.getTime();
-       model.processTimeElapsed(100);
+       model.processTimeElapsed();
        assertEquals(time + 1, model.getTime());
 
         // その他のイベントでは増えない

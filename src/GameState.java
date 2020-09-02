@@ -16,7 +16,7 @@ public class GameState implements State {
 
 	@Override
 	//時間経過時の処理
-	public State processTimeElapsed(int msec) {
+	public State processTimeElapsed() {
 		gameData.processingGame("TIME_ELAPSED");
 		backPosX+=1;
 		if(backPosX==1800) backPosX=0;

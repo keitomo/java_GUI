@@ -16,9 +16,9 @@ public class Model {
         this.game = game;
     }
 
-    public synchronized void processTimeElapsed(int msec) {
+    public synchronized void processTimeElapsed() {
         time++;
-        state = state.processTimeElapsed(time);
+        state = state.processTimeElapsed();
         repaint();
     }
 

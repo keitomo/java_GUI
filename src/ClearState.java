@@ -15,7 +15,7 @@ public class ClearState implements State {
 
 	@Override
 	//時間経過時の処理
-	public State processTimeElapsed(int msec) {
+	public State processTimeElapsed() {
 		return this;
 	}
 
