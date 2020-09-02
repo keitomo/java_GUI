@@ -24,20 +24,26 @@ public class Text {
 	
 	public void setWordList() throws IOException{
 		URL url = getClass().getResource("text/word_list.txt");
-		File file = new File(url.getPath());
-	    try(BufferedReader br = new BufferedReader(new FileReader(file));){    	  
-	        String str;
-	        while((str = br.readLine()) != null){
-	        	wordList.add(str);
-	        }
-
-	        	br.close();
-	    	}catch(FileNotFoundException e){
-	    		return;
-	    	}catch(IOException e){
-	    		return;
-	    	}
-	    }
+		BufferedReader brWord = null;
+		
+		try{
+    		brWord = new BufferedReader(new FileReader(new File(url.getPath())));
+    		String str;
+    		while((str = brWord.readLine()) != null){
+    			wordList.add(str);
+    		}
+    	}catch(IOException e){
+    		System.out.println("ファイルを読み込めませんでした");
+    		System.exit(0);
+    	}finally {
+    		try {
+				brWord.close();
+			} catch (IOException e) {
+				System.out.println("ファイルを読み込めませんでした");
+	    		System.exit(0);
+			}
+    	}
+	}
 	
 	public String getRandomWord() {
 		int randomValue = random.nextInt(wordList.size());

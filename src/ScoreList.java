@@ -33,22 +33,22 @@ public class ScoreList {
 		ScoreString = new ArrayList<String>();
 		ScoreList = new ArrayList<Score>();
 		URL url = getClass().getResource("text/score.txt");
-		BufferedReader br = null;
+		BufferedReader brScore = null;
 		
 	    try{
-	    		br = new BufferedReader(new FileReader(new File(url.getPath())));
+	    		brScore = new BufferedReader(new FileReader(new File(url.getPath())));
 	    		String str;
-	    		while((str = br.readLine()) != null){
+	    		while((str = brScore.readLine()) != null){
 	        		ScoreString.add(str);
 	    		}
 	    	}catch(IOException e){
-	    		System.out.println("ファイルに書き込みできませんでした");
+	    		System.out.println("ファイルを読み込めませんでした");
 	    		System.exit(0);
 	    	}finally {
 	    		try {
-					br.close();
+					brScore.close();
 				} catch (IOException e) {
-					System.out.println("ファイルに書き込みできませんでした");
+					System.out.println("ファイルを読み込めませんでした");
 		    		System.exit(0);
 				}
 	    	}
@@ -64,17 +64,17 @@ public class ScoreList {
 	
 	public void writeScore(Score s) {
 		URL url = getClass().getResource("text/score.txt");
-		BufferedWriter bw = null;
+		BufferedWriter bwScore = null;
 	    try{
-	    	bw = new BufferedWriter(new FileWriter(new File(url.getPath()),true));
-	    	bw.write(""+s.getScore()+" "+s.getDate());
-	       bw.newLine();
+	    	bwScore = new BufferedWriter(new FileWriter(new File(url.getPath()),true));
+	    	bwScore.write(""+s.getScore()+" "+s.getDate());
+	       bwScore.newLine();
 	    }catch(IOException e){
-	    	System.out.println("ファイルを見つけることができませんでした");
+	    	System.out.println("ファイルに書き込みできませんでした");
 	    	System.exit(0);
 	    }finally {
 	    	try {
-				bw.close();
+				bwScore.close();
 			} catch (IOException e) {
 				System.out.println("ファイルに書き込みできませんでした");
 		    	System.exit(0);
