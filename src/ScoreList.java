@@ -32,22 +32,25 @@ public class ScoreList {
 	private void loadScore() {
 		ScoreString = new ArrayList<String>();
 		ScoreList = new ArrayList<Score>();
-		
 		URL url = getClass().getResource("text/score.txt");
-		File file = new File(url.getPath());
-	    try(BufferedReader br = new BufferedReader(new FileReader(file));){    	  
-	        String str;
-	        while((str = br.readLine()) != null){
-	        	ScoreString.add(str);
-	        }
-
-	        	br.close();
-	    	}catch(FileNotFoundException e){
-	    		System.out.println("ファイルを見つけることができませんでした");
-	    		System.exit(0);
+		BufferedReader br = null;
+		
+	    try{
+	    		br = new BufferedReader(new FileReader(new File(url.getPath())));
+	    		String str;
+	    		while((str = br.readLine()) != null){
+	        		ScoreString.add(str);
+	    		}
 	    	}catch(IOException e){
 	    		System.out.println("ファイルに書き込みできませんでした");
 	    		System.exit(0);
+	    	}finally {
+	    		try {
+					br.close();
+				} catch (IOException e) {
+					System.out.println("ファイルに書き込みできませんでした");
+		    		System.exit(0);
+				}
 	    	}
 		
 			for(int i=0;i<ScoreString.size();i++) {
@@ -61,18 +64,22 @@ public class ScoreList {
 	
 	public void writeScore(Score s) {
 		URL url = getClass().getResource("text/score.txt");
-		File file = new File(url.getPath());
-	    try(BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));){
+		BufferedWriter bw = null;
+	    try{
+	    	bw = new BufferedWriter(new FileWriter(new File(url.getPath()),true));
 	    	bw.write(""+s.getScore()+" "+s.getDate());
 	       bw.newLine();
-	       bw.close();
-	    	}catch(FileNotFoundException e){
-	    		System.out.println("ファイルを見つけることができませんでした");
-	    		System.exit(0);
-	    	}catch(IOException e){
-	    		System.out.println("ファイルに書き込みできませんでした");
-	    		System.exit(0);
-	    	}
+	    }catch(IOException e){
+	    	System.out.println("ファイルを見つけることができませんでした");
+	    	System.exit(0);
+	    }finally {
+	    	try {
+				bw.close();
+			} catch (IOException e) {
+				System.out.println("ファイルに書き込みできませんでした");
+		    	System.exit(0);
+			}
+	    }
 	}
 
 	
