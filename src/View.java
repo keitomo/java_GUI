@@ -28,7 +28,7 @@ public class View extends JPanel {
        State state = model.getState();
        state.paintComponent(g);//
        Toolkit.getDefaultToolkit().sync();
-       
+              
        //g.setColor(Color.red);
        //g.drawLine(400, 0, 400, 600);
        //g.drawLine(0, 300, 800, 300);
