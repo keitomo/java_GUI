@@ -24,24 +24,20 @@ public class Text {
 	
 	public void setWordList() throws IOException{
 		URL url = getClass().getResource("text/word_list.txt");
-		BufferedReader brWord = null;
-		
-		try{
-    		brWord = new BufferedReader(new FileReader(new File(url.getPath())));
-    		String str;
-    		while((str = brWord.readLine()) != null){
-    			wordList.add(str);
-    		}
-    	}catch(IOException e){
-    		System.out.println("ファイルを読み込めませんでした");
+		File file = new File(url.getPath());
+	    try(BufferedReader brWord = new BufferedReader(new FileReader(file));){    	  
+	        String str;
+	        while((str = brWord.readLine()) != null){
+	        	wordList.add(str);
+	        }
+
+	       brWord.close();
+    	}catch(FileNotFoundException e){
+    		System.out.println("ファイルを見つけることができませんでした");
     		System.exit(0);
-    	}finally {
-    		try {
-				brWord.close();
-			} catch (IOException e) {
-				System.out.println("ファイルを読み込めませんでした");
-	    		System.exit(0);
-			}
+    	}catch(IOException e){
+    		System.out.println("ファイルを読み込みできませんでした");
+    		System.exit(0);
     	}
 	}
 	

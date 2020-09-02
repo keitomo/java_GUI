@@ -33,25 +33,22 @@ public class ScoreList {
 		ScoreString = new ArrayList<String>();
 		ScoreList = new ArrayList<Score>();
 		URL url = getClass().getResource("text/score.txt");
-		BufferedReader brScore = null;
-		
-	    try{
-	    		brScore = new BufferedReader(new FileReader(new File(url.getPath())));
-	    		String str;
-	    		while((str = brScore.readLine()) != null){
-	        		ScoreString.add(str);
-	    		}
-	    	}catch(IOException e){
-	    		System.out.println("ファイルを読み込めませんでした");
+		File file = new File(url.getPath());
+	    try(BufferedReader brScore = new BufferedReader(new FileReader(file));){    	  
+	        String str;
+	        while((str = brScore.readLine()) != null){
+	        	ScoreString.add(str);
+	        }
+
+	        	brScore.close();
+	    	}catch(FileNotFoundException e){
+	    		System.out.println("ファイルを見つけることができませんでした");
 	    		System.exit(0);
-	    	}finally {
-	    		try {
-					brScore.close();
-				} catch (IOException e) {
-					System.out.println("ファイルを読み込めませんでした");
-		    		System.exit(0);
-				}
+	    	}catch(IOException e){
+	    		System.out.println("ファイルを読み込みできませんでした");
+	    		System.exit(0);
 	    	}
+
 		
 			for(int i=0;i<ScoreString.size();i++) {
 				String Temp = ScoreString.get(i);
@@ -64,22 +61,18 @@ public class ScoreList {
 	
 	public void writeScore(Score s) {
 		URL url = getClass().getResource("text/score.txt");
-		BufferedWriter bwScore = null;
-	    try{
-	    	bwScore = new BufferedWriter(new FileWriter(new File(url.getPath()),true));
+		File file = new File(url.getPath());
+	    try(BufferedWriter bwScore = new BufferedWriter(new FileWriter(file,true));){
 	    	bwScore.write(""+s.getScore()+" "+s.getDate());
 	       bwScore.newLine();
-	    }catch(IOException e){
-	    	System.out.println("ファイルに書き込みできませんでした");
-	    	System.exit(0);
-	    }finally {
-	    	try {
-				bwScore.close();
-			} catch (IOException e) {
-				System.out.println("ファイルに書き込みできませんでした");
-		    	System.exit(0);
-			}
-	    }
+	       bwScore.close();
+	    	}catch(FileNotFoundException e){
+	    		System.out.println("ファイルを見つけることができませんでした");
+	    		System.exit(0);
+	    	}catch(IOException e){
+	    		System.out.println("ファイルに書き込みできませんでした");
+	    		System.exit(0);
+	    	}
 	}
 
 	
