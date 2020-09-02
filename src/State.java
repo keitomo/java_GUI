@@ -9,7 +9,6 @@ public interface State{
 	public static final int CLEAR = 4;
 	public static final int BOSS = 5;
 	
-	
 	GameFiles file = GameFiles.getInstance();
 	public State processTimeElapsed(int msec);//時間経過時の処理
 	public State processKeyTyped(String typed);//キー入力されたときの処理

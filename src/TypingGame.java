@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class TypingGame {
 	/*
-	 * ゲームの主要処理をするクラス（予定）
+	 * ゲームの主要処理をするクラス
 	 */
 	
 	public static final int HOLE = 0;
@@ -21,6 +21,7 @@ public class TypingGame {
 	private int time=0;
 	private int timeLimit=3000;
 	private int selectProblem = -1;
+	private int problemCount=0;
 	private boolean clearFlag=false;
 	private boolean problemFlag=false;
 	private int map[];
@@ -80,7 +81,7 @@ public class TypingGame {
 		return remainingProblemNum;
 	}
 	
-	public int getClearProblem() {
+	public int getNowPos() {
 		return MAP-remainingProblemNum;
 	}
 
@@ -98,6 +99,10 @@ public class TypingGame {
 	
 	public int getSelectProblem() {
 		return selectProblem;
+	}
+	
+	public int getProblemCount() {
+		return problemCount;
 	}
 	
 	public double getScore() {
@@ -161,6 +166,7 @@ public class TypingGame {
 						checkNum=0;
 						input = "";
 						selectProblem=-1;
+						problemCount+=1;
 					}
 					else if(checkNum<problem[selectProblem].length()&&Text.checkText(problem[selectProblem], event.charAt(0), checkNum)) {
 						checkNum++;

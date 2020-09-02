@@ -23,9 +23,11 @@ public class RankingState implements State {
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
 		g.drawString("Ranking", 315, 100);
-		View.drawStringCenter(g, " 1st "+Integer.toString(scoreList.getScore(0).getScore())+"s    "+scoreList.getScore(0).getDate(), 400, 200);
-		View.drawStringCenter(g, "2nd "+Integer.toString(scoreList.getScore(1).getScore())+"s    "+scoreList.getScore(1).getDate(), 400, 300);
-		View.drawStringCenter(g, "3rd "+Integer.toString(scoreList.getScore(2).getScore())+"s    "+scoreList.getScore(2).getDate(), 400, 400);
+		for(int i = 0; i<3;i++) {
+			View.drawStringCenter(g, Integer.toString(i+1)+".  "+
+			Integer.toString(scoreList.getScore(i).getScore())+"s    "+
+			scoreList.getScore(i).getDate(), 400, 200+100*i);
+		}
 
 		g.drawString("スペースキーで戻る", 400, 550);
 	}
