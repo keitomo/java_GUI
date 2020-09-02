@@ -1,6 +1,3 @@
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
@@ -11,15 +8,9 @@ public class Game extends JFrame {
     /** 初期ウィンドウサイズ（幅） */
     public static final int WIN_WIDTH = 800;
     
-    private int displayWidth;
-    private int displayHeight;
-
     private Model model = null;
 
     public Game() {
-    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    	displayWidth = screenSize.width;
-    	displayHeight = screenSize.height;
     	//Windowのタイトルとサイズを設定
     	resetWindow();
         // Window を閉じるボタンを有効にする
@@ -52,7 +43,7 @@ public class Game extends JFrame {
     //ボスが来たときにタイトルと画面サイズを変える
     public void setBossWindow() {
     	setTitle("Llbre0ffice wr1ter");
-    	setSize(displayWidth, displayHeight);
+    	setSize(1280, 720);
     }
     
     //タイトルと画面サイズをゲーム用に変える

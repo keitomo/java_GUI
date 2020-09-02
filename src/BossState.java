@@ -35,7 +35,7 @@ public class BossState implements State {
 	@Override
 	//画面描画処理
 	public void paintComponent(Graphics g) {
-		g.drawImage(file.bossImg,0,0, null);
+		g.drawImage(file.bossImg,0,0,1280,720, null);
 	}
 
 }
