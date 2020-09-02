@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
+
 import java.awt.event.KeyEvent;
-    
+
 import org.junit.Test;
 
 public class ModelTest {
