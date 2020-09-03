@@ -30,7 +30,7 @@ public class VariousState implements State {
 	
 	@Override
 	//画面描画処理
-	public voi)d paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		g.drawImage(file.back,-500,0, null);
 		switch(stateName) {
 		case "CLEAR":
