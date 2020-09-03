@@ -126,17 +126,54 @@ public class TypingGame {
 	public int[] getMap() {
 		return stageMap;
 	}
-
 	
-	public void processingGame(String event) {
-		if (event.equals("TIME_ELAPSED")) {
-			time++;
-			timeLimit--;
+	public void processKeyTyped(String typed) {
+		inputNum++;
+		if(selectProblem == -1) {
+			if(Text.checkText(problem[0],problem[1].charAt(checkNum),checkNum)) {
+				;
+			}else if(Text.checkText(problem[0], typed.charAt(0), checkNum)) {
+				selectProblem = 0;
+			}else if(Text.checkText(problem[1], typed.charAt(0), checkNum)) {
+				selectProblem = 1;
+			}
+			checkNum++;
+			matchNum++;
+			input += typed;
 		}else {
+			if(Text.matchText(problem[selectProblem],input) && typed.equals("ENTER") && remainingProblemNum!=0) {
+				setProblem(selectProblem);
+				int checkMap = MAP-remainingProblemNum+selectProblem+1;
+				if(checkMap >= 0 && checkMap <= MAP && 	stageMap[checkMap]!=HOLE) {
+					remainingProblemNum-=selectProblem+1;
+					problemFlag = true;
+				}
+				checkNum=0;
+				input = "";
+				selectProblem=-1;
+				problemCount+=1;
+			}else if(checkNum<problem[selectProblem].length()&&Text.checkText(problem[selectProblem], typed.charAt(0), checkNum)) {
+				checkNum++;
+				matchNum++;
+				input += typed;
+			}
+			
+			if(remainingProblemNum<=0) {
+				clearFlag=true;
+			}
+		}
+	}
+	
+	public void processTimeElapsed() {
+		time++;
+		timeLimit--;
+	}
+	
+	/*
+	public void processingGame(String event) {
 			inputNum++;
 			if(selectProblem==-1) {
-				if(Text.checkText(problem[0],problem[1].charAt(checkNum),checkNum)&&
-					Text.checkText(problem[0], event.charAt(0), checkNum)) {	
+				if(Text.checkText(problem[0],problem[1].charAt(checkNum),checkNum)) {	
 					selectProblem = -1;
 				}else if(Text.checkText(problem[0], event.charAt(0), checkNum)) {
 					selectProblem = 0;
@@ -173,6 +210,6 @@ public class TypingGame {
 					clearFlag=true;
 				}					
 			}						
-		}
-	}
+		}//*/
 }
+

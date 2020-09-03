@@ -17,7 +17,7 @@ public class GameState implements State {
 	@Override
 	//時間経過時の処理
 	public State processTimeElapsed() {
-		gameData.processingGame("TIME_ELAPSED");
+		gameData.processTimeElapsed();
 		backPosX+=1;
 		if(backPosX==1800) backPosX=0;
 		if(gameData.getProblemFlag()) {
@@ -35,9 +35,9 @@ public class GameState implements State {
 		if(typed.equals("ESC")){
 			return new TitleState();
 		}
-		gameData.processingGame(typed);
+		gameData.processKeyTyped(typed);
 		if(gameData.getClearFlag()) {
-			return new ClearState(gameData);
+			return new VariousState("CLEAR",gameData);
 		}
 		return this;
 	}

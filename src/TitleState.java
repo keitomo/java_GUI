@@ -10,7 +10,7 @@ public class TitleState implements State {
 	public static final int GAME = 1;
 	public static final int RANKING = 2;
 	public static final int HELP = 3;
-	public static final int EXIT = 4;	
+	public static final int EXIT = 4;
 	private int nextState = 1; //次のState番号
 	
 	private GameFiles file = GameFiles.getInstance();
@@ -27,7 +27,7 @@ public class TitleState implements State {
 		if(typed.equals("UP")) {
 			nextState--;
 			if(nextState == 0)
-				nextState = 4;
+				nextState = EXIT;
 		}
 		else if(typed.equals("DOWN")) {
 			nextState++;
@@ -38,9 +38,9 @@ public class TitleState implements State {
 				case GAME:
 					return new GameState();
 				case RANKING:
-					return new RankingState();
+					return new VariousState("RANKING",null);
 				case HELP:
-					return new HelpState();
+					return new VariousState("HELP",null);
 				case EXIT:
 					System.exit(0);
 					break;
