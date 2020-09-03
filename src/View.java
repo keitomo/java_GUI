@@ -43,5 +43,9 @@ public class View extends JPanel {
     public static void drawStringCenter(Graphics g,String str,int x,int y) {
     	g.drawString(str, x-(g.getFontMetrics().stringWidth(str)/2), y);
     }
+    
+    public static void drawStringRight(Graphics g,String str,int x,int y) {
+    	g.drawString(str, x-(g.getFontMetrics().stringWidth(str)), y);
+    }
        
 }

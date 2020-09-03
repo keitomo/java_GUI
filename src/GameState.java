@@ -8,7 +8,10 @@ public class GameState implements State {
 	private GameFiles file = GameFiles.getInstance();
 	private TypingGame gameData;
 	private int backPosX = 0;
-	private int animePos=0;
+	private int animePosX=0;
+	private int animePosY=0;
+	private boolean clearFlag = false;
+	private int wait=0;
 	
 	GameState() {
 		gameData = new TypingGame();
@@ -17,13 +20,23 @@ public class GameState implements State {
 	@Override
 	//時間経過時の処理
 	public State processTimeElapsed() {
+		if(clearFlag) {
+			wait++;
+			if(wait>3)
+				return new VariousState("CLEAR",gameData);
+		}
 		gameData.processTimeElapsed();
 		backPosX+=1;
 		if(backPosX==1800) backPosX=0;
 		if(gameData.getProblemFlag()) {
-			animePos+=24;
-			if(animePos==120*gameData.getNowPos()) {
+			animePosX+=24;
+			animePosY+=24;
+			if(animePosX==120*gameData.getNowPos()) {
+				animePosY=0;
+				gameData.resetJump();
 				gameData.resetProblemFlag();
+				if(gameData.getRemainingStep()==0)
+					clearFlag=true;
 			}
 		}
 		return this;
@@ -36,9 +49,6 @@ public class GameState implements State {
 			return new TitleState();
 		}
 		gameData.processKeyTyped(typed);
-		if(gameData.getRemainingStep()==0) {
-			return new VariousState("CLEAR",gameData);
-		}
 		return this;
 	}
 
@@ -47,8 +57,8 @@ public class GameState implements State {
 	public void paintComponent(Graphics g) {
 		g.drawImage(file.back, 0-backPosX,0, null);
     	g.drawImage(file.back, 1800-backPosX,0, null);
-		g.drawString("Time:"+Integer.toString(gameData.getTime()/10),0,50);
-		g.drawString("Problem:"+Integer.toString(gameData.getRemainingStep()),500,50);
+		g.drawString("Time:"+Integer.toString(gameData.getTime()/10),10,50);
+		View.drawStringRight(g,"残り"+String.format("%02d", gameData.getRemainingStep())+"マス",790,50);
 		View.drawStringCenter(g,gameData.getInput(),400,200);
 		View.drawStringCenter(g,gameData.getProblem(0),200,100);
 		View.drawStringCenter(g,gameData.getProblem(1),600,100);
@@ -76,9 +86,20 @@ public class GameState implements State {
 				g.setColor(new Color(0,0,0,0));
 				break;
 			}
-			g.fillRect(i*120-animePos+350, 420, 100, 30);
+			g.fillRect(i*120-animePosX+350, 420, 100, 30);
 		}
-		g.drawImage(file.mainChar,375 ,(int)(375+Math.abs(Math.sin((animePos*Math.PI)/120))*-100), null);
+		switch(gameData.getJump()) {
+		case 0:
+			g.drawImage(file.mainChar,375 ,(int)(375+Math.abs(Math.sin((animePosY*Math.PI)/120))*-100), null);
+			break;
+		case 1:
+			g.drawImage(file.mainChar,375 ,(int)(375+Math.abs(Math.sin((animePosY*Math.PI)/240))*-100), null);
+			break;
+		default:
+			g.drawImage(file.mainChar,375 ,375, null);
+			break;
+		}
+		
 
 		
 

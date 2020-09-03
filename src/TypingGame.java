@@ -8,7 +8,7 @@ public class TypingGame {
 	public static final int GOAL = 2;
 	
 	private RandomNumGen random;
-	private static final int MAP=10; //MAPの長さを表す
+	private static final int MAP=50; //MAPの長さを表す
 	private Text text;
 	String input = ""; //入力された文字列を保持
 	String[] problem = {"",""}; //問題を保持
@@ -17,8 +17,8 @@ public class TypingGame {
 	private int matchNum=0; //正解タイプ率
 	private int remainingStepNum=0; //ゴールまであと何マスかを表す
 	private int time=0; //経過時間を表す
-	private int timeLimit=3000;
 	private int selectProblem = -1; //選択してる問題を表す
+	private int jump=-1;
 	private int problemCount=0; //解いた問題数
 	private boolean problemFlag=false; //問題を解いたときにたつフラグ
 	private int[] stageMap; //マップを保持する配列
@@ -61,10 +61,6 @@ public class TypingGame {
 		return time;
 	}
 	
-	public int getTimeLimit() {
-		return timeLimit;
-	}
-		
 	public String getProblem(int i) {
 		return problem[i];
 	}
@@ -149,6 +145,7 @@ public class TypingGame {
 				}
 				checkNum=0;
 				input = "";
+				jump=selectProblem;
 				selectProblem=-1;
 				problemCount+=1;
 			}else if(Text.checkText(problem[selectProblem], typed.charAt(0), checkNum)) {
@@ -164,7 +161,14 @@ public class TypingGame {
 
 	public void processTimeElapsed() {
 		time++;
-		timeLimit--;
+	}
+	
+	public int getJump() {
+		return jump;
+	}
+
+	public void resetJump() {
+		jump = -1;
 	}
 	
 }

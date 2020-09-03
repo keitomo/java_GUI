@@ -79,11 +79,9 @@ public class TypingGameTest {
 	@Test
 	public final void 時間経過を記録できているか() {
 		TypingGame tg = new TypingGame();
-		int firstTimeLimit=tg.getTimeLimit();
 		for(int i=1;i<100;i++) {
 			tg.processTimeElapsed();
 			assertEquals(i,tg.getTime());
-			assertEquals(firstTimeLimit-i,tg.getTimeLimit());
 		}
 	}
 	
