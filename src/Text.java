@@ -111,7 +111,8 @@ public class Text {
 		 * ひらがなをローマ字に変換した結果を返す関数
 		 */
 		StringBuilder t = new StringBuilder();
-		for ( int i = 0; i < s.length(); i++ ) {
+		int i=0;
+		while( i < s.length()) {
 			if ( i <= s.length() - 2 )  {
 				if ( m.containsKey(s.substring(i,i+2))) {
 					t.append(m.get(s.substring(i, i+2)));
@@ -130,6 +131,7 @@ public class Text {
 					t.append(s.charAt(i));
 				}
 			}
+			i++;
 		}
 		return t.toString();
 	}
