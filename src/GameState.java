@@ -48,7 +48,7 @@ public class GameState implements State {
 		g.drawImage(file.back, 0-backPosX,0, null);
     	g.drawImage(file.back, 1800-backPosX,0, null);
 		g.drawString("Time:"+Integer.toString(gameData.getTime()/10),0,50);
-		g.drawString("Problem:"+Integer.toString(gameData.getRemainingProblem()),500,50);
+		g.drawString("Problem:"+Integer.toString(gameData.getRemainingStep()),500,50);
 		View.drawStringCenter(g,gameData.getInput(),400,200);
 		View.drawStringCenter(g,gameData.getProblem(0),200,100);
 		View.drawStringCenter(g,gameData.getProblem(1),600,100);

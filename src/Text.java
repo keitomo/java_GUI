@@ -20,9 +20,14 @@ public class Text {
 	public Text() {
 		setKana2Rome();
 		random = RandomNumGen.getInstance();
+		try {
+			setWordList();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void setWordList() throws IOException{
+	private void setWordList() throws IOException{
 		URL url = getClass().getResource("text/word_list.txt");
 		File file = new File(url.getPath());
 	    try(BufferedReader brWord = new BufferedReader(new FileReader(file));){    	  
@@ -50,6 +55,18 @@ public class Text {
 	
 	public static boolean matchText(String problem, String input) {
 		return problem.equals(input);
+	}
+	
+	public static int duplicationText(String p1,String p2) {
+		int duplication=0;
+		while(duplication < Math.min(p1.length(),p2.length())) {
+			if(p1.charAt(duplication)==p2.charAt(duplication)) {
+				duplication++;
+			}else {
+				break;
+			}
+		}
+		return duplication;
 	}
 		
 	private void setKana2Rome() {

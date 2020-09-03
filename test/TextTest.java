@@ -46,12 +46,15 @@ public class TextTest {
 	@Test
 	public void ファイルがあるかどうか検知する() {
 		Text text = new Text();
-		try {
-			text.setWordList();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		text.getRandomWord();	
+	}
+	
+	@Test
+	public void 文字が何文字目でかぶるか検出する() {
+		assertEquals(0,Text.duplicationText("ohayou", "konnichiha"));
+		assertEquals(1,Text.duplicationText("yamagnashi", "yuuyake"));
+		assertEquals(2,Text.duplicationText("ra-menn","ragu-nn"));
+		assertEquals(6,Text.duplicationText("nattou", "nattou"));
 	}
 
 }
