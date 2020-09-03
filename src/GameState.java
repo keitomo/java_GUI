@@ -100,9 +100,6 @@ public class GameState implements State {
 			g.drawImage(file.mainChar,375 ,375, null);
 			break;
 		}
-		
-
-		
 
 	}
 
