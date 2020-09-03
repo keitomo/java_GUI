@@ -20,7 +20,6 @@ public class TypingGame {
 	private int timeLimit=3000;
 	private int selectProblem = -1; //選択してる問題を表す
 	private int problemCount=0; //解いた問題数
-	private boolean clearFlag=false; //ゲームのクリアしたかどうかを表すフラグ
 	private boolean problemFlag=false; //問題を解いたときにたつフラグ
 	private int[] stageMap; //マップを保持する配列
 
@@ -98,10 +97,6 @@ public class TypingGame {
 		return problemCount;
 	}
 	
-	public boolean getClearFlag() {
-		return clearFlag;
-	}
-	
 	public boolean getProblemFlag() {
 		return problemFlag;
 	}
@@ -127,35 +122,43 @@ public class TypingGame {
 	
 	public void processKeyTyped(String typed) {
 		inputNum++;
-		if(selectProblem == -1) {
-			selectProblem = checkSelect(typed);
+		switch(selectProblem) {
+		case -1:
+			selectProblem = checkSelect(typed);	
 			if(Text.checkText(problem[0], typed.charAt(0), checkNum) ||Text.checkText(problem[1], typed.charAt(0), checkNum)) {
 				checkNum++;
 				matchNum++;
 				input += typed;
 			}
-			
-		}else {
+			break;
+		case 0 :
+		case 1 :
 			if(Text.matchText(problem[selectProblem],input) && typed.equals("ENTER") && remainingStepNum!=0) {
 				setProblem(selectProblem);
 				int checkMap = MAP-remainingStepNum+selectProblem+1;
-				if(checkMap >= 0 && checkMap <= MAP && 	stageMap[checkMap]!=HOLE) {
-					remainingStepNum-=selectProblem+1;
-					problemFlag = true;
+				try {
+					if(stageMap[checkMap]!=HOLE) {
+						remainingStepNum-=selectProblem+1;
+						problemFlag = true;
+					}else if(stageMap[checkMap]==GOAL) {
+						remainingStepNum=0;
+						problemFlag = true;
+					}
+				}catch(ArrayIndexOutOfBoundsException e) {
+					problemFlag=false;
 				}
 				checkNum=0;
 				input = "";
 				selectProblem=-1;
 				problemCount+=1;
-			}else if(checkNum<problem[selectProblem].length()&&Text.checkText(problem[selectProblem], typed.charAt(0), checkNum)) {
+			}else if(Text.checkText(problem[selectProblem], typed.charAt(0), checkNum)) {
 				checkNum++;
 				matchNum++;
 				input += typed;
 			}
-			
-			if(remainingStepNum<=0) {
-				clearFlag=true;
-			}
+			break;
+		default:
+			break;
 		}
 	}
 

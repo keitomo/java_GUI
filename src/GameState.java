@@ -36,7 +36,7 @@ public class GameState implements State {
 			return new TitleState();
 		}
 		gameData.processKeyTyped(typed);
-		if(gameData.getClearFlag()) {
+		if(gameData.getRemainingStep()==0) {
 			return new VariousState("CLEAR",gameData);
 		}
 		return this;
