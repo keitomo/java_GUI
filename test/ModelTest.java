@@ -32,5 +32,36 @@ public class ModelTest {
        controller.keyTyped(new KeyEvent(view, 1, 1, 0, KeyEvent.VK_A, 'a'));
        assertEquals("a", model.getTypedChar());
     }
+    
+    @Test
+    public void ボスが来た画面への遷移() {
+    	Game g = new Game();
+    	Model model = new Model(g);
+    	assertEquals(TitleState.class,model.getState().getClass());
+    	model.processKeyTyped("ALT");
+    	assertEquals(BossState.class,model.getState().getClass());
+    }
+    
+    
+    public void 各画面への遷移() {
+    	Game g = new Game();
+    	Model model = new Model(g);
+    	assertEquals(TitleState.class,model.getState().getClass());
+    	model.processKeyTyped("ALT");
+    	assertEquals(BossState.class,model.getState().getClass());
+    	model.processKeyTyped("ESC");
+    	assertEquals(TitleState.class,model.getState().getClass());
+    	model.processKeyTyped("ENTER");
+    	assertEquals(GameState.class,model.getState().getClass());
+    	model.processKeyTyped("ESC");
+    	assertEquals(TitleState.class,model.getState().getClass());
+    	model.processKeyTyped("DOWN");
+    	model.processKeyTyped("ENTER");
+    	assertEquals(VariousState.class,model.getState().getClass());
+    	model.processKeyTyped(" ");
+    	assertEquals(TitleState.class,model.getState().getClass());
+    }
+    
+    
 
 }
