@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class VariousState implements State {
@@ -48,6 +49,12 @@ public class VariousState implements State {
 			break;
 		case "HELP":
 			View.drawStringCenter(g, "遊び方", 400, 100);
+			double small = 0.7;
+			g.fillRect(403-(int)(782*small)/2,113,(int)(782*small),(int)(560*small));
+			g.setColor(Color.white);
+			g.fillRect(397-(int)(782*small)/2,107,(int)(782*small),(int)(560*small));
+			g.setColor(Color.black);
+			g.drawImage(file.help, 400-(int)(782*small)/2,110,(int)(782*small),(int)(560*small),null);
 			break;
 		default:
 			break;

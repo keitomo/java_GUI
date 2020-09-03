@@ -14,6 +14,9 @@ public class GameFiles {
 	//主人公
 	public final Image mainChar = Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/robot.png"));
 	
+	//help画面用
+	public final Image help= Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/help.png"));
+	
 	//ボスが来たときに使用する背景画像
 	public final Image bossImg = Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/boss.png"));
 	
