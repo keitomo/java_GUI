@@ -7,11 +7,11 @@ public class GameState implements State {
 	 */
 	private GameFiles file = GameFiles.getInstance();
 	private TypingGame gameData;
-	private int backPosX = 0;
-	private int animePosX=0;
-	private int animePosY=0;
-	private boolean clearFlag = false;
-	private int wait=0;
+	private int backPosX = 0; //背景を動かすようの変数
+	private int animePosX=0;  //キャラクターを動かすようの変数X
+	private int animePosY=0;  //キャラクターを動かすようの変数Y
+	private boolean clearFlag = false; //ゲームをクリアしたときに立つフラグ
+	private int wait=0; //アニメーションが終わってから少し待つようにするためにつかう変数
 	
 	GameState() {
 		gameData = new TypingGame();
@@ -20,23 +20,24 @@ public class GameState implements State {
 	@Override
 	//時間経過時の処理
 	public State processTimeElapsed() {
-		if(clearFlag) {
+		if(clearFlag) { //クリアフラグが立っていたら
 			wait++;
 			if(wait>3)
 				return new VariousState("CLEAR",gameData);
+		}else { //クリアフラグが立っていなかったら
+			gameData.processTimeElapsed(); //ゲームに時間を通知
 		}
-		gameData.processTimeElapsed();
 		backPosX+=1;
-		if(backPosX==1800) backPosX=0;
-		if(gameData.getProblemFlag()) {
+		if(backPosX==file.back.getWidth(null)) backPosX=0; //画像が端まで行ったらリセット
+		if(gameData.getProblemFlag()) { //問題を解いたフラグが立っていたら
 			animePosX+=24;
 			animePosY+=24;
 			if(animePosX==120*gameData.getNowPos()) {
 				animePosY=0;
 				gameData.resetJump();
 				gameData.resetProblemFlag();
-				if(gameData.getRemainingStep()==0)
-					clearFlag=true;
+				if(gameData.getRemainingStep()==0) //残りのステップ数が0なら
+					clearFlag=true; //クリアフラグを立てる
 			}
 		}
 		return this;
