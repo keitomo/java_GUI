@@ -50,7 +50,11 @@ public class Text {
 	}
 
 	public static boolean checkText(String problem, char input,int count) {
-		return (problem.charAt(count) == input);
+		try {
+			return (problem.charAt(count) == input);
+		}catch(StringIndexOutOfBoundsException e) {
+			return false;
+		}
 	}
 	
 	public static boolean matchText(String problem, String input) {
